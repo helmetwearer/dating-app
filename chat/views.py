@@ -1,4 +1,4 @@
-from django.shortcuts import render, reverse, redirect, render_to_response
+from django.shortcuts import render, reverse, redirect
 from .forms import MessageForm
 from .models import Conversations, Messages, Winks, Views, Reject
 from django.contrib.auth.models import User

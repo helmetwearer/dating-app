@@ -39,10 +39,10 @@ SECRET_KEY = os.environ.get('secret_key')
 
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = development
+DEBUG = True
 
-ALLOWED_HOSTS = [os.environ.get('HOSTNAME'), "5a824725c9bd45ef92e402d580741815.vfs.cloud9.us-east-1.amazonaws.com"]
-
+#ALLOWED_HOSTS = [os.environ.get('HOSTNAME'), "5a824725c9bd45ef92e402d580741815.vfs.cloud9.us-east-1.amazonaws.com"]
+ALLOWED_HOSTS = ['*']
 
 # Application definition
 
@@ -111,7 +111,7 @@ else:
             'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
         }
     }
-
+'''
 AWS_S3_OBJECT_PARAMETERS = {
     'Expires': 'Thu, 31 Dec 2099 20:00:00 GMT',
     'CacheControl': 'max-age=94608000'
@@ -123,7 +123,7 @@ AWS_ACCESS_KEY_ID = os.environ.get("aws_access_key")
 AWS_SECRET_ACCESS_KEY = os.environ.get("aws_secret_key")
 
 AWS_S3_CUSTOM_DOMAIN = '%s.s3.amazonaws.com' % AWS_STORAGE_BUCKET_NAME
-
+'''
 
 # Password validation
 # https://docs.djangoproject.com/en/1.11/ref/settings/#auth-password-validators
@@ -161,7 +161,7 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.11/howto/static-files/
 STATICFILES_LOCATION = 'static'
-STATICFILES_STORAGE = 'custom_storages.StaticStorage'
+#STATICFILES_STORAGE = 'custom_storages.StaticStorage'
 
 STATIC_URL = '/static/'
 STATICFILES_DIRS = (
@@ -177,9 +177,9 @@ USE_L10N = False
 MESSAGE_STORAGE = "django.contrib.messages.storage.session.SessionStorage"
 
 MEDIAFILES_LOCATION = 'media'
-DEFAULT_FILE_STORAGE = 'custom_storages.MediaStorage'
+#DEFAULT_FILE_STORAGE = 'custom_storages.MediaStorage'
 
-MEDIA_URL = 'https://%s/%s/' % (AWS_S3_CUSTOM_DOMAIN, MEDIAFILES_LOCATION)
+#MEDIA_URL = 'https://%s/%s/' % (AWS_S3_CUSTOM_DOMAIN, MEDIAFILES_LOCATION)
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 # Change to a different email address
@@ -195,3 +195,10 @@ AUTHENTICATION_BACKENDS = [
     
 STRIPE_PUBLISHABLE = os.environ.get('stripe_publishable')
 STRIPE_SECRET = os.environ.get('stripe_key')
+
+SECRET_KEY = 'mysecretkey'
+
+try:
+    from dating_app.local_settings import *
+except:
+    print ('no local_settings.py file found')

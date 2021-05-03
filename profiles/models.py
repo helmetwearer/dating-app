@@ -159,7 +159,7 @@ class ProfileImage(models.Model):
         ('NOT APPROVED', 'Not approved')
     )
     
-    user = models.ForeignKey(User, default=None)
+    user = models.ForeignKey(User, default=None, on_delete=models.CASCADE)
     image = models.ImageField(upload_to=image_filename, blank=True)
     is_verified = models.CharField(choices=APPROVAL, default="TO BE APPROVED", blank=False, max_length=14)
 

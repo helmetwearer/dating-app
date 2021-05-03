@@ -22,7 +22,7 @@ class Order(models.Model):
         return "{0}-{1}-{2}".format(self.id, self.date, self.full_name)
 
 class Subscription(models.Model):
-    user = models.ForeignKey(User, null=False)
+    user = models.ForeignKey(User, null=False, on_delete=models.CASCADE)
     plan = models.CharField(max_length=255)
     customer_id = models.CharField(max_length=255)
     
