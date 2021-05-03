@@ -42,9 +42,11 @@
                 <li class="nav-item">
                     <a class="{% if new_view%}new-engagement{%endif%} nav-link" href="{% url 'views' %}"><p>VIEWS</p></a>
                 </li>
+                {% if request.user.is_authenticated %}
                 <li class="nav-item">
                     <a class="nav-link" href="{% url 'member_profile' request.user.id %}"><p>PROFILE</p></a>
                 </li>
+                {% endif %}
             </ul>
             
             <ul class="d-none d-lg-flex nav navbar-nav">

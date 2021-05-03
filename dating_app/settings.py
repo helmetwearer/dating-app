@@ -198,6 +198,7 @@ STRIPE_SECRET = os.environ.get('stripe_key')
 
 SECRET_KEY = 'mysecretkey'
 
+AUTO_PREMIUM_SUBSCRIPTION = True
 try:
     from dating_app.local_settings import *
 except:

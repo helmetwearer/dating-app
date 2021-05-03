@@ -10,6 +10,7 @@ from .models import Profile, ProfileImage
 from chat.models import Conversations, Messages, Views
 import stripe
 from checkout.models import Subscription
+from django.conf import settings
     
 """
 Function to check if member profiles matches with current user's sexuality (and 
@@ -52,8 +53,10 @@ def height_choices(member_height):
         "208.28":"6' 10",
         "210.82":"6' 11"
         }
-        
-    return height[member_height]
+    try:
+        return height[member_height]
+    except KeyError:
+        return "5' 9"
 
 # URL to log user out
 @login_required
@@ -210,7 +213,7 @@ def member_profile(request, id):
             message_form = MessagesForm(request.POST)
             if message_form.is_valid():
                 # Check if user is premium
-                if request.user.profile.is_premium:
+                if request.user.profile.is_premium and not settings.AUTO_PREMIUM_SUBSCRIPTION:
                     customer_stripe_id = Subscription.objects.filter(user_id=request.user).first()
                     customer = stripe.Customer.retrieve(customer_stripe_id.customer_id)
                     for sub in customer.subscriptions:

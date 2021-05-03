@@ -29,6 +29,9 @@ def subscribe(request):
         'plan_F5eyGdYCvZPtON': 'Monthly'
     }
     
+    if settings.AUTO_PREMIUM_SUBSCRIPTION:
+        make_user_premium(request)
+        return redirect(reverse('index'))
     # If user submits payment form
     if request.method == 'POST':
         order_form = OrderForm(request.POST)
